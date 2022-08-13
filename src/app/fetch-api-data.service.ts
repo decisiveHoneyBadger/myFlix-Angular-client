@@ -14,19 +14,11 @@ const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
   providedIn: 'root'
 })
 export class UserRegistrationService {
-  // Inject the HttpClient module to the constructor params
- // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
   }
- // Making the api call for the user registration endpoint
-  // public userRegistration(userDetails: any): Observable<any> {
-  //   console.log(userDetails);
-  //   return this.http.post(apiUrl + 'users', userDetails).pipe(
-  //   catchError(this.handleError)
-  //   );
-  // }
 
-  // Making the api call for the user registration endpoint
+
+  // calls API endpoint for user registration 
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
@@ -36,7 +28,7 @@ export class UserRegistrationService {
       );
   }
 
-    // API call to user login endpoint
+    // calls API endpoint for user login 
   public userLogin(userCredentials: any): Observable<any> {
     console.log(userCredentials);
     return this.http
@@ -45,7 +37,7 @@ export class UserRegistrationService {
   }
 
  
-  //  API call to get one movie endpoint
+  //  calls API endpoint for one movie 
   getSingleMovie(title: any): Observable<any> {
    
     return this.http
@@ -60,7 +52,7 @@ export class UserRegistrationService {
       );
   }
 
-  // API call to get data on one director
+  // calls API endpoint for one director
   getDirector(name: any): Observable<any> {
    
     return this.http
@@ -75,8 +67,7 @@ export class UserRegistrationService {
       );
   }
 
-// API call to genre endpoint
-// Get Genre
+// calls API endpoint for one genre 
 getGenre(): Observable<any> {
   
   return this.http
@@ -91,8 +82,7 @@ getGenre(): Observable<any> {
     );
 }
   
-  // API call to user data endpoint
-  // API call to get favortie movies of a user endpoint
+  // calls API endpoint for username 
   getUser(username: any): Observable<any> {
  
     return this.http
@@ -107,7 +97,7 @@ getGenre(): Observable<any> {
       );
   }
 
-    // API call to add a favorite movie to user endpoint
+    // calls API endpoint for adding one movie to the favorite movies list 
   addFavoriteMovie( movieId: any): Observable<any> {
   
     return this.http
@@ -122,7 +112,7 @@ getGenre(): Observable<any> {
       );
   }
 
-  // API call to delete a movie from the users favorites list
+  // calls API endpoint for deleting one movie from the favorite movies list 
   removeFavoriteMovie(movieID: any): Observable<any> {
   
     return this.http
@@ -137,8 +127,8 @@ getGenre(): Observable<any> {
       );
   }
 
-    // API call to edit user information endpoint
-editUser(updateDetails: any): Observable<any> {
+    // calls API for editing user data (user profile)
+  editUser(updateDetails: any): Observable<any> {
    
     return this.http
       .put(apiUrl + `users/${username}`, updateDetails, {
