@@ -9,7 +9,7 @@ const token = localStorage.getItem('token');
 const username = localStorage.getItem('username');
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://desolate-basin-26751.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
