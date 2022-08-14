@@ -36,6 +36,18 @@ export class UserRegistrationService {
       .pipe(catchError(this.handleError));
   }
 
+  // calls API endpoint for all movies 
+  getAllMovies(): Observable<any> {
+    
+    return this.http
+      .get(apiUrl + 'movies', {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+
  
   //  calls API endpoint for one movie 
   getSingleMovie(title: any): Observable<any> {
