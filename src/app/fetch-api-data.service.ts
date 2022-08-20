@@ -13,7 +13,7 @@ const apiUrl = 'https://desolate-basin-26751.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class FetchApiDataService  {
   constructor(private http: HttpClient) {
   }
 
