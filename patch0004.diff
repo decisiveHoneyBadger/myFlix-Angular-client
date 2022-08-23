@@ -1,0 +1,35 @@
+From ec8ed1340b960c624bfb3046773d08f76c400678 Mon Sep 17 00:00:00 2001
+From: decisiveHoneyBadger <k.guevenc@web.de>
+Date: Sun, 14 Aug 2022 05:11:22 +0200
+Subject: [PATCH] added endpoint for all movies
+
+---
+ src/app/fetch-api-data.service.ts | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/src/app/fetch-api-data.service.ts b/src/app/fetch-api-data.service.ts
+index 416408b..d70429a 100644
+--- a/src/app/fetch-api-data.service.ts
++++ b/src/app/fetch-api-data.service.ts
+@@ -36,6 +36,18 @@ export class UserRegistrationService {
+       .pipe(catchError(this.handleError));
+   }
+ 
++  // calls API endpoint for all movies 
++  getAllMovies(): Observable<any> {
++    
++    return this.http
++      .get(apiUrl + 'movies', {
++        headers: new HttpHeaders({
++          Authorization: 'Bearer ' + token,
++        }),
++      })
++      .pipe(map(this.extractResponseData), catchError(this.handleError));
++  }
++
+  
+   //  calls API endpoint for one movie 
+   getSingleMovie(title: any): Observable<any> {
+-- 
+2.31.0
+
