@@ -13,7 +13,7 @@ const apiUrl = 'https://desolate-basin-26751.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class FetchApiDataService  {
+export class FetchApiDataService {
   constructor(private http: HttpClient) {
   }
 
@@ -28,7 +28,7 @@ export class FetchApiDataService  {
       );
   }
 
-    // calls API endpoint for user login 
+  // calls API endpoint for user login 
   public userLogin(userCredentials: any): Observable<any> {
     console.log(userCredentials);
     return this.http
@@ -38,7 +38,6 @@ export class FetchApiDataService  {
 
   // calls API endpoint for all movies 
   getAllMovies(): Observable<any> {
-    
     return this.http
       .get(apiUrl + 'movies', {
         headers: new HttpHeaders({
@@ -48,10 +47,10 @@ export class FetchApiDataService  {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
- 
+
   //  calls API endpoint for one movie 
   getSingleMovie(title: any): Observable<any> {
-   
+
     return this.http
       .get(apiUrl + `movies/${title}`, {
         headers: new HttpHeaders({
@@ -66,7 +65,7 @@ export class FetchApiDataService  {
 
   // calls API endpoint for one director
   getDirector(name: any): Observable<any> {
-   
+
     return this.http
       .get(apiUrl + `movies/director/${name}`, {
         headers: new HttpHeaders({
@@ -79,24 +78,24 @@ export class FetchApiDataService  {
       );
   }
 
-// calls API endpoint for one genre 
-getGenre(): Observable<any> {
-  
-  return this.http
-    .get( apiUrl + 'genre', {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
+  // calls API endpoint for one genre 
+  getGenre(): Observable<any> {
+
+    return this.http
+      .get(apiUrl + 'genre', {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
       })
-    })
-    .pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-}
-  
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
   // calls API endpoint for username 
   getUser(username: any): Observable<any> {
- 
+
     return this.http
       .get(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({
@@ -109,11 +108,11 @@ getGenre(): Observable<any> {
       );
   }
 
-    // calls API endpoint for adding one movie to the favorite movies list 
-  addFavoriteMovie( movieId: any): Observable<any> {
-  
+  // calls API endpoint for adding one movie to the favorite movies list 
+  addFavoriteMovie(movieId: any): Observable<any> {
+
     return this.http
-      .post(apiUrl + `users/${username}/favorites/${movieId}`,{},   {
+      .post(apiUrl + `users/${username}/favorites/${movieId}`, {}, {
         headers: new HttpHeaders({
           Authorization: `Bearer ${token}`,
         })
@@ -124,9 +123,11 @@ getGenre(): Observable<any> {
       );
   }
 
-  // calls API endpoint for deleting one movie from the favorite movies list 
   removeFavoriteMovie(movieID: any): Observable<any> {
-  
+    // Get Authorization token stored in local storage
+    const token = localStorage.getItem('token');
+    // Get Username stored in local storage
+    const username = localStorage.getItem('user');
     return this.http
       .delete(apiUrl + `users/${username}/movies/${movieID}`, {
         headers: new HttpHeaders({
@@ -139,9 +140,10 @@ getGenre(): Observable<any> {
       );
   }
 
-    // calls API for editing user data (user profile)
+
+  // calls API for editing user data (user profile)
   editUser(updateDetails: any): Observable<any> {
-   
+
     return this.http
       .put(apiUrl + `users/${username}`, updateDetails, {
         headers: new HttpHeaders({
@@ -154,23 +156,41 @@ getGenre(): Observable<any> {
       );
   }
 
+  // deletes user profile (de-registering) 
+  deleteUser(): Observable<any> {
+    // gets authorization token stored in local storage
+    const token = localStorage.getItem('token');
+    // gets username stored in local storage
+    const username = localStorage.getItem('user');
+    return this.http
+      .delete(apiUrl + `users/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token
+        })
+      })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
 
-    private extractResponseData(res: any): any {
+
+  private extractResponseData(res: any): any {
     const body = res;
     return body || {};
   }
 
 
 
-private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
-    console.error(
+      console.error(
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`);
     }
     return throwError(
-    'Something bad happened; please try again later.');
+      'Something bad happened; please try again later.');
   }
 }
