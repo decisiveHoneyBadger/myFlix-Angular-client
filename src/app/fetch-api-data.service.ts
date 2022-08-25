@@ -108,11 +108,32 @@ export class FetchApiDataService {
       );
   }
 
+  // gets the list of favorite movies
+  getFavoriteMovies(): Observable<any> {
+    // Get Authorization token stored in local storage
+    const token = localStorage.getItem('token');
+    // Get Username stored in local storage
+    const username = localStorage.getItem('user');
+    return this.http
+      .get(apiUrl + `user/${username}/movies`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
+
+
   // calls API endpoint for adding one movie to the favorite movies list 
   addFavoriteMovie(movieId: any): Observable<any> {
-
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
     return this.http
-      .post(apiUrl + `users/${username}/favorites/${movieId}`, {}, {
+      .post(apiUrl + `users/${username}/movies/${movieId}`, {}, {
         headers: new HttpHeaders({
           Authorization: `Bearer ${token}`,
         })

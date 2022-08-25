@@ -14,13 +14,13 @@ import { Router } from '@angular/router';
 })
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
-  
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
     public router: Router
-   
+
   ) { }
 
   ngOnInit(): void {
@@ -38,17 +38,13 @@ export class UserLoginFormComponent implements OnInit {
       // Add token and username to local Storage
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', response.user.Username);
-       this.snackBar.open(response, 'OK', {
-        duration: 2000
-      });
+      alert('Hey ' + response.user.Username + ' you have successfully logged in!');
 
       // Redirects to movies (main page)
       this.router.navigate(['movies']);
     }, (response) => {
       console.log(response);
-      this.snackBar.open(response, 'OK', {
-        duration: 2000
-      });
+
     });
   }
 
