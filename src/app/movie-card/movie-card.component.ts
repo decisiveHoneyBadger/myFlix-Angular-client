@@ -13,7 +13,7 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favoriteMovies: any[] = [];
 
