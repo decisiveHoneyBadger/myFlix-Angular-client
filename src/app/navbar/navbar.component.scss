@@ -1,14 +1,30 @@
-$backgroundColor: #000000;
-$cardColor: #ffffff;
-$textColor: #000000;
+$backgroundColor: #BF40BF;
+$textColor: #ffffff;
 $boxShadowColor: #d3d5d7;
 
 
 .nav-bar {
     border-bottom: $boxShadowColor;
-    background-color: $cardColor;
+    background-color: $backgroundColor;
+    color: $textColor;
+    padding: 20px;
+    
 }
 
 .logout-button {
     float: right;
+}
+
+.logout-button:hover {
+background-color: black;
+color:white;
+}
+
+.mat-button {
+    font-size: 20px;
+}
+
+.mat-button:hover {
+background-color: black;
+color:white;
 }
