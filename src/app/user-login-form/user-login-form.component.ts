@@ -36,7 +36,8 @@ export class UserLoginFormComponent implements OnInit {
       // Add token and username to local Storage
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', response.user.Username);
-      this.snackBar.open('Hey ' + response.user.Username + ' you have successfully logged in!');
+      // this.snackBar.open('Hey ' + response.user.Username + ' you have successfully logged in!', "OK", { duration: 2000 });
+      this.snackBar.open('Successfully logged in, ' + response.user.Username, "OK", { duration: 2000 });
 
       // Redirects to movies (main page)
       this.router.navigate(['movies']);

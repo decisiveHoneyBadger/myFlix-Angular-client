@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    public router: Router
+    public router: Router,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit {
   // logs out user and clears out local storage to reset token
   logOut(): void {
     localStorage.clear();
+    this.snackBar.open('successfully logged out', "OK", { duration: 2000 });
     this.router.navigate(['welcome']);
   }
 
