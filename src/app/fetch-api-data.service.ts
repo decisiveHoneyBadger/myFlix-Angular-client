@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GlobalConstants } from './constants';
 
 const token = localStorage.getItem('token');
 // Get username from localStorage for URLs
@@ -20,7 +21,7 @@ export class FetchApiDataService {
 
   // calls API endpoint for user registration 
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    if (GlobalConstants.enableDebugOutput) { console.log(userDetails) }
     return this.http
       .post(apiUrl + 'users', userDetails)
       .pipe(
@@ -30,7 +31,7 @@ export class FetchApiDataService {
 
   // calls API endpoint for user login 
   public userLogin(userCredentials: any): Observable<any> {
-    console.log(userCredentials);
+    if (GlobalConstants.enableDebugOutput) { console.log(userCredentials) }
     return this.http
       .post(apiUrl + 'login', userCredentials)
       .pipe(catchError(this.handleError));

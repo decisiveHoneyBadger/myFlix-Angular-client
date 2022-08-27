@@ -3,13 +3,14 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { GlobalConstants } from '../constants';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-  
+
 export class UserProfileComponent implements OnInit {
   user: any = {};
   userData: any = {};
@@ -27,7 +28,7 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
   }
 
-// gets user data from API call 
+  // gets user data from API call 
   getUser(): void {
     // this.fetchApiData.getUser().subscribe((resp: any) => {
     //   this.user = resp;
@@ -37,18 +38,18 @@ export class UserProfileComponent implements OnInit {
   }
 
   // opens the user profile dialog
-   openUserProfileDialog(): void {
+  openUserProfileDialog(): void {
     this.dialog.open(UserProfileComponent, {
       width: '300px'
     })
-   }
-  
+  }
+
   // enables user to edit given data
   editUser(): void {
-    console.log(this.userData);
+    if (GlobalConstants.enableDebugOutput) { console.log(this.userData) }
     this.fetchApiData.editUser(this.userData).subscribe((result) => {
       this.dialogRef.close();
-      console.log(result);
+      if (GlobalConstants.enableDebugOutput) { console.log(result) }
       this.snackBar.open('Successfully updated profile!', 'OK', {
         duration: 2000
       });
@@ -63,8 +64,8 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-// deletes user profile ( and redirects to the main page)
-    deleteProfile(): void {
+  // deletes user profile ( and redirects to the main page)
+  deleteProfile(): void {
     if (confirm('Are you sure you want to delete your account? This cannnot be undone.')) {
       this.router.navigate(['welcome']).then(() => {
         this.snackBar.open('You have successfully deleted your account!', 'OK', {

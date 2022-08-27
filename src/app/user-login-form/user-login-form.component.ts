@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { GlobalConstants } from '../constants';
 
 
 
@@ -34,7 +35,7 @@ export class UserLoginFormComponent implements OnInit {
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
       this.dialogRef.close(); // Close the modal on success
-      console.log(response);
+      if (GlobalConstants.enableDebugOutput) { console.log(response) }
       // Add token and username to local Storage
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', response.user.Username);
@@ -43,7 +44,7 @@ export class UserLoginFormComponent implements OnInit {
       // Redirects to movies (main page)
       this.router.navigate(['movies']);
     }, (response) => {
-      console.log(response);
+      if (GlobalConstants.enableDebugOutput) { console.log(response) }
 
     });
   }

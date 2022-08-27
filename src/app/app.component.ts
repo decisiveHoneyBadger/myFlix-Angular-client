@@ -3,6 +3,10 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { GlobalConstants } from './constants';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -11,6 +15,8 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 })
 export class AppComponent {
   title = 'myFlix-Angular-client';
+
+
 
   constructor(
     public dialog: MatDialog
@@ -32,3 +38,4 @@ export class AppComponent {
     });
   }
 }
+

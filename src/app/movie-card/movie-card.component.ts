@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
+import { GlobalConstants } from '../constants';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      if (GlobalConstants.enableDebugOutput) { console.log(this.movies) }
       return this.movies;
     });
   }
@@ -40,7 +41,7 @@ export class MovieCardComponent implements OnInit {
   getFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
       this.favoriteMovies = resp;
-      console.log(this.favoriteMovies);
+      if (GlobalConstants.enableDebugOutput) { console.log(this.favoriteMovies) }
       return this.favoriteMovies;
     });
   }
@@ -84,17 +85,17 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToFavoriteMovies(id: string): void {
-    console.log(id);
+    if (GlobalConstants.enableDebugOutput) { console.log(id) }
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
-      console.log(result);
+      if (GlobalConstants.enableDebugOutput) { console.log(result) }
       this.ngOnInit();
     })
   }
 
   removeFromFavoriteMovies(id: string): void {
-    console.log(id);
+    if (GlobalConstants.enableDebugOutput) { console.log(id) };
     this.fetchApiData.removeFavoriteMovie(id).subscribe((result) => {
-      console.log(result);
+      if (GlobalConstants.enableDebugOutput) { console.log(result) }
       this.ngOnInit();
     })
   }
