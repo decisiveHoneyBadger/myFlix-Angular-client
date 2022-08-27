@@ -6,13 +6,12 @@ import { Router } from '@angular/router';
 import { GlobalConstants } from '../constants';
 
 
-
-
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
   styleUrls: ['./user-login-form.component.scss']
 })
+
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
 
@@ -27,8 +26,6 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
   /**
    * sends login form inputs to the backend via fetchApiData 
    */
@@ -39,7 +36,7 @@ export class UserLoginFormComponent implements OnInit {
       // Add token and username to local Storage
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', response.user.Username);
-      alert('Hey ' + response.user.Username + ' you have successfully logged in!');
+      this.snackBar.open('Hey ' + response.user.Username + ' you have successfully logged in!');
 
       // Redirects to movies (main page)
       this.router.navigate(['movies']);

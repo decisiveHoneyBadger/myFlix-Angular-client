@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GlobalConstants } from '../constants';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component'
 
 @Component({
   selector: 'app-user-profile',
@@ -13,13 +14,11 @@ import { GlobalConstants } from '../constants';
 
 export class UserProfileComponent implements OnInit {
   user: any = {};
-  userData: any = {};
-
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<UserProfileComponent>,
+    //public dialogRef: MatDialogRef<UserProfileComponent>,
     public router: Router,
     public snackBar: MatSnackBar
   ) { }
@@ -30,37 +29,17 @@ export class UserProfileComponent implements OnInit {
 
   // gets user data from API call 
   getUser(): void {
-    // this.fetchApiData.getUser().subscribe((resp: any) => {
-    //   this.user = resp;
-    //   console.log(this.user);
-    //   return this.user;
-    // })
+    this.fetchApiData.getUser(localStorage.getItem('user')).subscribe((resp: any) => {
+      this.user = resp;
+      console.log(this.user);
+      return this.user;
+    })
   }
 
   // opens the user profile dialog
   openUserProfileDialog(): void {
-    this.dialog.open(UserProfileComponent, {
+    this.dialog.open(EditProfileComponent, {
       width: '300px'
-    })
-  }
-
-  // enables user to edit given data
-  editUser(): void {
-    if (GlobalConstants.enableDebugOutput) { console.log(this.userData) }
-    this.fetchApiData.editUser(this.userData).subscribe((result) => {
-      this.dialogRef.close();
-      if (GlobalConstants.enableDebugOutput) { console.log(result) }
-      this.snackBar.open('Successfully updated profile!', 'OK', {
-        duration: 2000
-      });
-      // Logs out user once 'username' or 'password' has been updated to avoid errors
-      if (this.userData.Username || this.userData.Password) {
-        localStorage.clear();
-        this.router.navigate(['welcome']);
-        this.snackBar.open('Please login again with your new credentials', 'OK', {
-          duration: 2000
-        });
-      }
     })
   }
 
