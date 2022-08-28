@@ -4,11 +4,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GlobalConstants } from './constants';
-
-const token = localStorage.getItem('token');
-// Get username from localStorage for URLs
-const username = localStorage.getItem('username');
-
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://desolate-basin-26751.herokuapp.com/';
 @Injectable({
@@ -57,7 +52,7 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'movies', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -74,7 +69,7 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + `movies/${title}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         })
       })
       .pipe(
@@ -94,7 +89,7 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + `movies/director/${name}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         })
       })
       .pipe(
@@ -113,7 +108,7 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'genre', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         })
       })
       .pipe(
@@ -133,7 +128,7 @@ export class FetchApiDataService {
     return this.http
       .get(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         })
       })
       .pipe(
@@ -218,11 +213,11 @@ export class FetchApiDataService {
    * @returns {} JSON - object of user data
    */
   editUser(updateDetails: any): Observable<any> {
-
+    const username = localStorage.getItem('username');
     return this.http
       .put(apiUrl + `users/${username}`, updateDetails, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.getToken(),
         })
       })
       .pipe(
@@ -270,5 +265,9 @@ export class FetchApiDataService {
     }
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem('token');
   }
 }
