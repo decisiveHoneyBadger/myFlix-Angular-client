@@ -27,7 +27,8 @@ export class UserLoginFormComponent implements OnInit {
   }
 
   /**
-   * sends login form inputs to the backend via fetchApiData 
+   * sends login form inputs to the backend (server) via fetchApiData 
+   * @returns {string} snackbar confirmation message 
    */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
