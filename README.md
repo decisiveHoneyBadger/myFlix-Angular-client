@@ -3,8 +3,8 @@
 ## Images
 
 <p align="center">
-  <img height="200" src="/src/image-1.png" >
-  <img height="200" src="/src/image-2.png" >
+  <img height="200" src="/src/image-1.png">
+  <img height="200" src="/src/image-2.png">
 </p>
 
 ## Description
