@@ -1,5 +1,12 @@
 # MyFlix-Angular-client
 
+## Images
+
+<p align="center">
+  <img height="200" src="/src/image-1.png" >
+  <img height="200" src="/src/image-2.png" >
+</p>
+
 ## Description
 
 This single-page, responsive application (SPA) is the client-side for an application called myFlix ([see the repository]) based on its existing server-side code (REST API and database), with supporting documentation. It features routing, rich interactions, several interface views, and a polished user experience.
@@ -61,3 +68,7 @@ Run `ng deploy --base-href=/myFlix-Angular-client/`
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## 🌱 Live Demo
+
+Check it out [here](https://decisivehoneybadger.github.io/myFlix-Angular-client/)
