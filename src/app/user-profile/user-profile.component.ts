@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GlobalConstants } from '../constants';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component'
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -23,11 +24,15 @@ export class UserProfileComponent implements OnInit {
     public snackBar: MatSnackBar
   ) { }
 
+  // gets user when page is being loaded
   ngOnInit(): void {
     this.getUser();
   }
 
-  // gets user data from API call 
+  /**
+   * gets user data from API call
+   * @function getUser 
+   */
   getUser(): void {
     this.fetchApiData.getUser(localStorage.getItem('user')).subscribe((resp: any) => {
       this.user = resp;
@@ -36,14 +41,20 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  // opens the user profile dialog
+  /**
+   * opens the user profile dialog
+   * @function openUserProfileDialog
+   */
   openUserProfileDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '300px'
     })
   }
 
-  // deletes user profile ( and redirects to the main page)
+  /**
+   * deletes user profile (and routes to the main page)
+   * @function deleteProfile
+   */
   deleteProfile(): void {
     if (confirm('Are you sure you want to delete your account? This cannnot be undone.')) {
       this.router.navigate(['welcome']).then(() => {

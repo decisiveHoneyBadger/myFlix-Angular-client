@@ -22,17 +22,31 @@ export class AppComponent {
   constructor(
     public dialog: MatDialog
   ) { }
-  // opens the dialog when the signup button is clicked  
+
+  /**
+   * opens the dialog for registration when the "get registered" button is clicked  
+   * @function openUserRegistrationDialog
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       width: '280px'
     });
   }
+
+  /**
+   * opens the dialog for login once user clicks "login" button
+   * @function openUserLoginDialog
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       width: '280px'
     })
   }
+
+  /**
+   * opens the dialog for movies once the previous steps have been successful 
+   * @function openMoviesDialog
+   */
   openMoviesDialog(): void {
     this.dialog.open(MovieCardComponent, {
       width: '500px'

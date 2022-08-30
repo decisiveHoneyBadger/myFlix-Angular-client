@@ -13,13 +13,16 @@ const apiUrl = 'https://desolate-basin-26751.herokuapp.com/';
 export class FetchApiDataService {
   constructor(private http: HttpClient) {
   }
-
+  /**
+   * Inject the HttpClient module to the constructor params. This will provide HttpClient module to the entire class making it available via this.http
+   */
 
   /**
-   * registers new users
-   * @method post
-   * @param userDetails 
-   * @returns newly created JSON user data 
+   * registers new users (POST API)
+   * @service POST
+   * @function userRegistration
+   * @param {any} userDetails
+   * @returns new user object in JSON  
    */
   public userRegistration(userDetails: any): Observable<any> {
     if (GlobalConstants.enableDebugOutput) { console.log(userDetails) }
@@ -32,8 +35,9 @@ export class FetchApiDataService {
 
   /**
    * logs in regsitered users 
+   * @service POST
    * @param userCredentials 
-   * @returns {string} JSON user data objects 
+   * @returns user data in JSON 
    */
   public userLogin(userCredentials: any): Observable<any> {
     if (GlobalConstants.enableDebugOutput) { console.log(userCredentials) }
@@ -44,8 +48,9 @@ export class FetchApiDataService {
 
   /**
    * gets all movies from the API
-   * @method get
-   * @params moviesd
+   * @service GET
+   * @function getAllMovies
+   * @params any
    * @returns JSON objects of movie arrays  
    */
   getAllMovies(): Observable<any> {
@@ -61,8 +66,9 @@ export class FetchApiDataService {
 
   /**
    * gets a single movie from the API
+   * @service GET
    * @param title of the movie
-   * @returns {string} JSON - object of a movie 
+   * @returns  JSON object of a movie 
    */
   getSingleMovie(title: any): Observable<any> {
 
@@ -80,9 +86,10 @@ export class FetchApiDataService {
 
   /**
    * gets a single director from the API
-   * @param name 
-   * @method get
-   * @returns {string} JSON - object of a director
+   * @service GET
+   * @function getDirector
+   * @param {any} name 
+   * @returns  director object in JSON
    */
   getDirector(name: any): Observable<any> {
 
@@ -100,8 +107,9 @@ export class FetchApiDataService {
 
   /**
    * gets a specific genre from the API
-   * @method get
-   * @returns {string} JSON - object of a genre
+   * @service GET
+   * @function getGenre
+   * @returns genre object in JSON
    */
   getGenre(): Observable<any> {
 
@@ -119,9 +127,9 @@ export class FetchApiDataService {
 
   /**
    * gets a single user from the database
-   * @method get
-   * @param username 
-   * @returns {} JSON - object of user data  
+   * @service GET
+   * @function getUser
+   * @returns user object in JSON  
    */
   getUser(username: any): Observable<any> {
 
@@ -139,8 +147,9 @@ export class FetchApiDataService {
 
   /**
    * gets user's list of favorite movies from the database
-   * @method get
-   * @returns {} JSON - object of user data  
+   * @service GET
+   * @function getFavoriteMovies 
+   * @returns movie object in JSON   
    */
   getFavoriteMovies(): Observable<any> {
     // Get Authorization token stored in local storage
@@ -163,9 +172,10 @@ export class FetchApiDataService {
 
   /**
    * adds a selected movie by its ID to the user's favorite movies list  
-   * @method post
-   * @param movieId 
-   * @returns {} JSON - array of favorite movies
+   * @service GET
+   * @function addFavoriteMovie
+   * @param {string | number} movieID 
+   * @returns JSON array of favorite movies
    */
   addFavoriteMovie(movieId: any): Observable<any> {
     const token = localStorage.getItem('token');
@@ -184,9 +194,10 @@ export class FetchApiDataService {
 
   /**
    * deletes a selected movie from the user's favorite movies list
-   * @method delete
-   * @param movieID 
-   * @returns {} JSON - array of updated favorite movies list
+   * @service DELETE
+   * @function removeFavoriteMovie
+   * @param {string | number} movieID
+   * @returns {} JSON - removed favorite movie
    */
   removeFavoriteMovie(movieID: any): Observable<any> {
     // Get Authorization token stored in local storage
@@ -208,9 +219,10 @@ export class FetchApiDataService {
 
   /**
    * updates user data
-   * @method put
-   * @param updateDetails 
-   * @returns {} JSON - object of user data
+   * @service PUT
+   * @function editUser
+   * @param {any} updateDetails
+   * @returns {} JSON - object of updated user data
    */
   editUser(updateDetails: any): Observable<any> {
     const username = localStorage.getItem('username');
@@ -228,7 +240,9 @@ export class FetchApiDataService {
 
   /**
    * deletes user profile (de-registering) from the databse
-   * @method delete 
+   * @service DELETE
+   * @function deleteUser
+   * @returns removed user object in JSON 
    */
   deleteUser(): Observable<any> {
     // gets authorization token stored in local storage
@@ -254,7 +268,11 @@ export class FetchApiDataService {
   }
 
 
-  // extracts data response
+  /**
+   * handles error function
+   * @param {HttpErrorResponse} error
+   * @function handleError 
+   */
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);

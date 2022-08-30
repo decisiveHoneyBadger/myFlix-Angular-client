@@ -28,12 +28,15 @@ export class UserLoginFormComponent implements OnInit {
 
   /**
    * sends login form inputs to the backend (server) via fetchApiData 
+   * @function loginUser
    * @returns {string} snackbar confirmation message 
    */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
       this.dialogRef.close(); // Close the modal on success
-      if (GlobalConstants.enableDebugOutput) { console.log(response) }
+      if (GlobalConstants.enableDebugOutput) {
+        console.log(response)
+      }
       // Add token and username to local Storage
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', response.user.Username);

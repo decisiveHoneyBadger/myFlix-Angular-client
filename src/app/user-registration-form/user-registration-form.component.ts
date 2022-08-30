@@ -29,7 +29,7 @@ export class UserRegistrationFormComponent implements OnInit {
 
   /**
    * sends registration input to the backend (server) 
-   * @returns {string} - snackbar confirmation message
+   * @function registerUser
    */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((response) => {

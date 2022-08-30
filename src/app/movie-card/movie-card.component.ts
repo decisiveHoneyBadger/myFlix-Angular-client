@@ -34,8 +34,9 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * displays all movies within the API
-   * @returns {object} - movie datas
+   * gets all movies from the API
+   * @function getMovies
+   * @returns array of movie objects
    */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -47,7 +48,9 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * gets the user's list of favorite movies
-   * @returns {string} - favorite movies
+   * @function getUser
+   * @params id
+   * @returns {string | number} id
    */
   getFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
@@ -59,7 +62,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * returns favorite movies based on ID
-   * @method isFav
+   * @function isFav
    * @param id of selected movie
    * @returns {boolean}
    */
@@ -69,8 +72,9 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * opens the genre dialog in movie-card
-   * @param name 
-   * @param description 
+   * @function openGenreDialog
+   * @param description
+   * @param name
    */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreComponent, {
@@ -84,6 +88,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * opens the director dialog in movie-card
+   * @function openDirectorDialog
    * @param name 
    * @param bio 
    * @param birthday 
@@ -101,6 +106,7 @@ export class MovieCardComponent implements OnInit {
 
   /**
    * opens the synopsis dialog in movie-card 
+   * @function openSynopsisDialog
    * @param title 
    * @param description 
    */
